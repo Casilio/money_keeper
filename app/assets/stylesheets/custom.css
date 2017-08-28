@@ -1,0 +1,25 @@
+.alert-notice {
+	@extend .alert-success
+}
+
+.user-form {
+	margin: 0 auto;
+	width: 400px;
+
+	.actions {
+		display: block;
+		margin: 10px auto;
+	}
+
+	label {
+		margin: 15px 0px 0px 0px;
+	}
+
+	.error_explanation {
+
+		h2 {
+			font-size: 1.5em;
+		}
+	}
+
+}

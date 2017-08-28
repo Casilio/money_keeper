@@ -12,7 +12,19 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
 				<% if user_signed_in? %>
-				 <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+
+                <li><%= link_to "Expose", expose_user_path(current_user) %></li>
+                <li><%= link_to "Income", income_user_path(current_user) %></li>
+        <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong> <%= current_user.email %></strong> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Report", report_user_path(current_user) %></li>
+                  <li><%= link_to "Statistic", root_path %></li>
+                  <li role="separator" class="divider"></li>
+                  <li><%= link_to "Profile", edit_user_registration_path %></li>
+                  <li role="separator" class="divider"></li>
+				          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+                </ul>
 				<% else %>
 				 <li><%= link_to "Sign Up", new_user_registration_path %></li>
 				 <li><%= link_to "Login", new_user_session_path %></li>

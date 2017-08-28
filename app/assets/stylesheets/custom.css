@@ -1,7 +1,20 @@
-.alert-notice {
-	@extend .alert-success
+html {
+	padding: 0;
 }
 
+/* devise alert */
+
+.alert-notice {
+	@extend .alert-success
+} 
+
+.alert-alert {
+	@extend .alert-danger
+}
+
+/* end devise alert */
+
+/* sign up, log in, restore password forms */
 .user-form {
 	margin: 0 auto;
 	width: 400px;
@@ -22,4 +35,76 @@
 		}
 	}
 
+	.back-link {
+		display: block;
+		margin: 10px auto;
+		max-width: 40px;
+	}
+
 }
+
+/* end forms */
+
+/* index page */
+
+.lead > a {
+	display: block;
+	max-width: 150px;
+	margin: 10px auto;
+} 
+
+.jumbotron {
+	background-image: url("wallet.png");
+	background-position: left;
+	background-repeat: no-repeat;
+	background-size: 40%
+}
+
+.plank {
+	border-top: 1px solid #aeaeae;
+}
+
+/* end index page */
+
+/* footer */
+
+.footer {
+	border-top: 1px solid #989898;
+	margin-top: 20px;
+	color: #555;
+	height: 50px;
+}
+
+.footer .navbar {
+	margin-bottom: 0;
+}
+
+.footer-menu {
+	list-style: none;
+}
+.footer-menu:after {
+	clear: both;
+	font-size: 0;
+	height: 0;
+	content: " ";
+}
+
+.footer .inc {
+	float: left;
+	margin-top: 10px;
+}
+
+.footer-menu li {
+	float: right;
+}
+
+.footer-menu a {
+	color: #999;
+}
+
+.footer-menu a:hover {
+	color: #222;
+}
+
+/* end footer */
+

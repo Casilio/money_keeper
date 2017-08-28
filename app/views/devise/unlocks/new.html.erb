@@ -1,16 +1,24 @@
-<h2>Resend unlock instructions</h2>
+<% provide(:title, "Reset unlock instructions") %>
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="user-form">
+	<h2 class="text-center">Resend unlock instructions</h2>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+	<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+	  <%= devise_error_messages! %>
 
-  <div class="actions">
-    <%= f.submit "Resend unlock instructions" %>
-  </div>
-<% end %>
+	  <div class="field">
+	    <%= f.label :email %><br />
+	    <%= f.email_field :email, class: "form-control", autofocus: true %>
+	  </div>
 
-<%= render "devise/shared/links" %>
+	  <div class="actions">
+	    <%= f.submit "Resend unlock instructions", class: "btn btn-primary" %>
+	  </div>
+	<% end %>
+	<div class="text-center">
+	<%= render "devise/shared/links" %>
+		
+	</div>
+	
+</div>
+

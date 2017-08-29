@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829062948) do
+ActiveRecord::Schema.define(version: 20170829124842) do
 
   create_table "cashes", force: :cascade do |t|
     t.decimal "value"
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "event_date", default: "2017-08-29"
+    t.string "description"
     t.index ["category_id"], name: "index_cashes_on_category_id"
   end
 

@@ -1,0 +1,22 @@
+<%= form_for(@transaction) do |f| %>
+	<%= render "shared/error_messages", object: f.object %>
+
+	<%= f.label :amount %>
+	<%= f.number_field :value, value: number_to_currency(f.object.value.to_f, delimiter: '', unit: ''), step: :any, class: "form-control" %>
+
+	<%= f.label :description %>
+	<%= f.text_field :description, class: "form-control", placeholder: "Description" %>
+
+	<%= f.label :date %>
+	<%= f.date_field :event_date, class: "form-control" %>
+
+	<%= f.label :category %>
+	<% if content_for?(:flows) %>
+		<%= f.collection_select :category_id, @expense_c, :id, :name, {include_blank: false}, { class: "form-control"} %>
+	<% else %>
+		<%= f.collection_select :category_id, @income_c, :id, :name, {include_blank: false}, { class: "form-control"} %>
+	<% end %>
+	<div>
+		<%= f.submit "Add transaction", class: 'btn btn-primary' %>
+	</div>
+<% end %>

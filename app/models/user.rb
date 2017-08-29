@@ -19,15 +19,19 @@ class User < ApplicationRecord
   	sum
   end
 
-  def expose
+  def expense
   	sum = 0
-  	self.categories.expose.each do |category|
+  	self.categories.expense.each do |category|
   		sum += category.cashes.sum(:value)
   	end
   	sum
   end
 
-  def balance
-  	income - expose
+  def balance(format: true)
+  	if format
+      "%.2f" % (income - expense)
+    else
+      income - expose
+    end
   end
 end

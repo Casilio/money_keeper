@@ -1,0 +1,51 @@
+<% provide(:title, "Categories") %>
+
+<div class="col-md-6 col-lg-6">
+	<h2>Income</h2>
+
+	<div class="add-category">
+		<%= render "new_category" %>
+	</div>
+
+	<% if @income_c.any? %>
+		<ul class="list-group">
+			<% @income_c.each do |incom| %>
+				<li class="list-group-item justify-content-between">
+				    <%= incom.name %>
+				    <span class="badge badge-default badge-pill">
+						<%= currency(incom.cashes.sum(:value)) %>
+				    </span>
+				    <%= link_to "Remove", category_path(incom), method: :delete, class: "badge" %>
+				    <%= link_to "Edit", edit_category_path(incom), class: "badge" %>
+				</li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p>Add category for income using form above</p>
+	<% end %>
+</div>
+<div class="col-md-6 col-lg-6">
+	<h2>Expense</h2>
+	
+	<div class="add-category">
+		<% content_for(:flows) do %>expense<% end %>
+		<%= render "new_category" %>
+	</div>
+
+	<% if @expense_c.any?  %>
+		<ul class="list-group">
+			<% @expense_c.each do |expos| %>
+				<li class="list-group-item justify-content-between">
+				    <%= expos.name %>
+				    <span class="badge badge-default badge-pill">
+						<%= currency(expos.cashes.sum(:value)) %>
+				    </span>
+				    <%= link_to "Remove", category_path(expos), method: :delete, class: "badge" %>
+				    <%= link_to "Edit", edit_category_path(expos), class: "badge" %>
+				</li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p>Add category for expense using form above</p>
+	<% end %>
+</div>

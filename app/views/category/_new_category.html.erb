@@ -1,0 +1,12 @@
+<%= form_for(@flow, url: category_index_path, html: { class: "form-inline" } ) do |f| %>
+	<%= render "shared/error_messages", object: f.object %>
+
+	<% if content_for(:flows) %>
+		<%= f.hidden_field :flow, value: yield(:flows) %>
+	<% else %>
+		<%= f.hidden_field :flow, value: :income %>
+	<% end %>
+	<%= f.text_field :name, class: 'form-control', placeholder: "Category name" %>
+
+	<%= f.submit "Add category", class: 'btn btn-primary' %>
+<% end %>

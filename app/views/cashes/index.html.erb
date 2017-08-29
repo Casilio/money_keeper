@@ -1,0 +1,38 @@
+<% provide(:title, "Transactions") %>
+
+<div class="col-md-6 col-lg-6">
+	<h2>Income transactions</h2>
+
+	<% if @income_c.any? %>
+
+		<div class="add-category">
+			<%= render "new_transaction" %>
+		</div>
+		<ul class="list-group">
+			<% @income_c.each do |incom| %>
+				
+			<% end %>
+		</ul>
+
+	<% else %>
+		<p>First you have to add some income <%= link_to "categories", category_index_path %></p>
+	<% end %>
+</div>
+
+<div class="col-md-6 col-lg-6">
+	<h2>Expense transactions</h2>
+	
+	<% if @expense_c.any?  %>
+		<div class="add-category">
+			<% content_for(:flows) do %>expense<% end %>
+			<%= render "new_transaction" %>
+		</div>
+		<ul class="list-group">
+			<% @expense_c.each do |expos| %>
+				
+			<% end %>
+		</ul>
+	<% else %>
+		<p>First you have to add some exponse <%= link_to "categories", category_index_path %></p>
+	<% end %>
+</div>

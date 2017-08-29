@@ -15,7 +15,7 @@
 				    <span class="badge badge-default badge-pill">
 						<%= currency(incom.cashes.sum(:value)) %>
 				    </span>
-				    <%= link_to "Remove", category_path(incom), method: :delete, class: "badge" %>
+				    <%= link_to "Remove", category_path(incom), method: :delete, class: "badge", data: { confirm: "Are you sure?" } %>
 				    <%= link_to "Edit", edit_category_path(incom), class: "badge" %>
 				</li>
 			<% end %>

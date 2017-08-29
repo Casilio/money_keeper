@@ -19,7 +19,6 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %><strong> (<%= current_user.balance %>$) </strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "Report", report_user_path(current_user) %></li>
-                  <li><%= link_to "Statistic", statistics_user_path(current_user) %></li>
                   <li role="separator" class="divider"></li>
                   <li><%= link_to "Profile", edit_user_registration_path %></li>
                   <li role="separator" class="divider"></li>

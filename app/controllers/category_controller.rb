@@ -7,7 +7,6 @@ class CategoryController < ApplicationController
 
 	def create
 		@flow = current_user.categories.new(category_params)
-		unique_name_check(@flow)
 		if @flow.save
 			flash[:success] = "Category was added"
 			redirect_to category_index_path
@@ -50,14 +49,7 @@ class CategoryController < ApplicationController
 		end
 
 		def find_category
-			current_user.categories.find_by(params[:id])
+			Category.find(params[:id])
 		end
 
-		def unique_name_check(category)
-	    	finded = current_user.categories.find_by(name: category.name)
-	    	debugger
-	    	unless finded
-	    		category.errors.add(:name, "Category name already in use")
-	    	end
-    	end
 end

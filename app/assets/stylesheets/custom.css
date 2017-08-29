@@ -126,3 +126,26 @@ html {
 div.field_with_errors {
 	display: inline;
 }
+
+
+/* end category page */
+
+/* transaction page */
+
+.add-transaction {
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+
+	input {
+		margin: 0;
+	}
+
+	label {
+		margin: 13px 0 0 0;
+	}
+	.btn {
+		margin-top: 13px;
+	}
+}
+
+/* end transaction page */

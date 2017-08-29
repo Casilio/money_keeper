@@ -1,16 +1,8 @@
 class UsersController < ApplicationController
 	before_action :corrent_user
 
-	def income
-
-	end
-
-	def expose
-		
-	end
-
 	def report
-		
+		@income = current_user.categories
 	end
 
 	private

@@ -5,17 +5,32 @@
 
 	<% if @income_c.any? %>
 
-		<div class="add-category">
+		<div class="add-transaction">
 			<%= render "new_transaction" %>
 		</div>
+
+		<% if @income_c.first.cashes.any? %>
+		<h3>Transactions list:</h3>
 		<ul class="list-group">
 			<% @income_c.each do |incom| %>
+				<% incom.cashes.each do |trans| %>
+					<li class="list-group-item justify-content-between">
+					    <%= trans.description %>
+					    <span class="badge badge-default badge-pill">
+							<%= trans.value %>
+					    </span>
+					    <%= link_to "Remove", cash_path(trans), method: :delete, class: "badge", data: { confirm: "Are you sure?" } %>
+					    <%= link_to "Edit", edit_cash_path(trans), class: "badge" %>
+					    <p class="badge"><%= trans.event_date %></p>
+					</li>
 				
+				<% end %>
 			<% end %>
 		</ul>
+		<% end %>
 
 	<% else %>
-		<p>First you have to add some income <%= link_to "categories", category_index_path %></p>
+		<p>First you have to add income <%= link_to "categories", category_index_path %></p>
 	<% end %>
 </div>
 
@@ -23,16 +38,30 @@
 	<h2>Expense transactions</h2>
 	
 	<% if @expense_c.any?  %>
-		<div class="add-category">
+		<div class="add-transaction">
 			<% content_for(:flows) do %>expense<% end %>
 			<%= render "new_transaction" %>
 		</div>
+		<% if @expense_c.first.cashes.any? %>
+		<h3>Transactions list:</h3>
 		<ul class="list-group">
 			<% @expense_c.each do |expos| %>
+				<% expos.cashes.each do |trans| %>
+					<li class="list-group-item justify-content-between">
+					    <%= trans.description %>
+					    <span class="badge badge-default badge-pill">
+							<%= trans.value %>
+					    </span>
+					    <%= link_to "Remove", cash_path(trans), method: :delete, class: "badge", data: { confirm: "Are you sure?" } %>
+					    <%= link_to "Edit", edit_cash_path(trans), class: "badge" %>
+					    <p class="badge"><%= trans.event_date %></p>
+					</li>
 				
+				<% end %>
 			<% end %>
 		</ul>
+		<% end %>
 	<% else %>
-		<p>First you have to add some exponse <%= link_to "categories", category_index_path %></p>
+		<p>First you have to add expense <%= link_to "categories", category_index_path %></p>
 	<% end %>
 </div>

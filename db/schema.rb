@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829124842) do
+ActiveRecord::Schema.define(version: 20170829175823) do
 
   create_table "cashes", force: :cascade do |t|
     t.decimal "value"
@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(version: 20170829124842) do
     t.datetime "updated_at", null: false
     t.date "event_date", default: "2017-08-29"
     t.string "description"
+    t.integer "user_id"
     t.index ["category_id"], name: "index_cashes_on_category_id"
+    t.index ["user_id"], name: "index_cashes_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|

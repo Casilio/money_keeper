@@ -1,6 +1,8 @@
 class Transaction < ApplicationRecord
 
-  before_save :check_balance, :check_date
+  before_save :check_date
+  before_create :check_balance
+  around_save :check_update
 
   belongs_to :category
   belongs_to :user
@@ -32,5 +34,14 @@ class Transaction < ApplicationRecord
         self.errors.add(:event_date, "must be less or equal current date")
         throw(:abort)
       end
+    end
+
+    def check_update
+        yield
+        if self.user.balance(format: false) < 0
+          self.amount = self.amount_was
+          self.errors.add(:amount, "is invalid. Balance can't be less that zero.")
+          raise ActiveRecord::Rollback
+        end
     end
 end

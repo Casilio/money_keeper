@@ -11,6 +11,9 @@ class Category < ApplicationRecord
  	belongs_to :user
     has_many :transactions, dependent: :destroy
 
+    def amount
+    	self.transactions.sum(:amount)
+    end
 
 	def unique_name_check
 		flow = self.flow

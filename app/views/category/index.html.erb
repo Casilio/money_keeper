@@ -1,6 +1,6 @@
 <% provide(:title, "Categories") %>
 
-<div class="col-md-6 col-lg-6">
+<div class="col-md-4 col-lg-4">
 	<h2>Category form</h2>
 
 	<div class="add-category">
@@ -8,7 +8,7 @@
 	</div>
 
 </div>
-<div class="col-md-6 col-lg-6">
+<div class="col-md-8 col-lg-8">
 	<h2>Categories list:</h2>
 
 	<% if @categories.any?  %>
@@ -30,7 +30,7 @@
 						<%= cat.flow %>
 					</td>
 					<td>
-						<%= currency(cat.transactions.sum(:amount)) %>
+						<%= currency(cat.amount) %>
 					</td>
 					<td>
 					    <%= link_to " ", edit_category_path(cat), class: "badge  glyphicon glyphicon-pencil" %>

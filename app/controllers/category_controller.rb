@@ -1,5 +1,7 @@
 class CategoryController < ApplicationController
+	before_action :authenticate_user!
 	before_action :get_catagories
+	before_action :get_category, only: [:edit, :update, :destroy]
 
 	def index
 		@category = current_user.categories.build
@@ -15,19 +17,11 @@ class CategoryController < ApplicationController
 		end
 	end
 
-	def destroy
-		category = find_category
-		category.destroy
-		flash[:success] = "Category was removed"
-		redirect_to category_index_path
-	end
 
 	def edit
-		@category = find_category
 	end
 
 	def update
-		@category = find_category
 		save = @category.update_attributes(category_params)
 		if save
 			flash[:success] = "Category was changed"
@@ -36,6 +30,18 @@ class CategoryController < ApplicationController
 			render "edit"
 		end
 
+	end
+
+	def destroy
+		new_balance = current_user.balance(format: false).to_f - @category.amount
+		if @category.flow == "income" and new_balance < 0
+	        flash[:danger] = "Operation was not perform. Balance can't be less than zero."
+	        redirect_to category_index_path
+	    else
+			@category.destroy
+			flash[:success] = "Category was removed"
+			redirect_to category_index_path
+		end
 	end
 
 	private
@@ -47,8 +53,8 @@ class CategoryController < ApplicationController
 			@categories = current_user.categories.all
 		end
 
-		def find_category
-			Category.find(params[:id])
+		def get_category
+			@category = Category.find(params[:id])
 		end
 
 end

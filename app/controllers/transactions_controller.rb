@@ -1,7 +1,8 @@
 class TransactionsController < ApplicationController
-  before_action :get_categories, only: [:index, :edit]
+  before_action :authenticate_user!
+  before_action :get_categories, only: [:index, :edit, :update, :create]
   before_action :get_transaction, only: [:destroy, :edit, :update]
-  before_action :get_transactions, only: [:index]
+  before_action :get_transactions, only: [:index, :create]
 
   def index
     @transaction = Transaction.new(event_date: Time.zone.now, amount: 1)
@@ -23,15 +24,7 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    save = @transaction.update_attributes(transaction_params)
-    flow = @transaction.category.flow
-    if flow == "income"
-      @categories = current_user.categories.income
-    else
-      @categories = current_user.categories.expense
-    end
-
-    if save
+    if  @transaction.update_attributes(transaction_params)
       flash[:success] = "Transaction was updated"
       redirect_to transactions_path
     else
@@ -40,9 +33,16 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
-    @transaction.destroy
-    flash[:success] = "Transaction was removed."
-    redirect_to transactions_path
+    flow = @transaction.category.flow
+    new_balance = current_user.balance(format: false).to_f - @transaction.amount
+    if flow == "income" and new_balance < 0
+        flash[:danger] = "Operation was not perform. Balance can't be less than zero."
+        redirect_to transactions_path
+    else
+      @transaction.destroy
+      flash[:success] = "Transaction was removed."
+      redirect_to transactions_path
+    end
   end
 
   private

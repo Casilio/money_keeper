@@ -12,19 +12,29 @@ class User < ApplicationRecord
   end
 
 
-  def income 
-  	self.categories.income.joins(:transactions).sum(:amount) 
-  end
-
-  def expense
-    self.categories.expense.joins(:transactions).sum(:amount)
-  end
-
-  def balance(format: true)
-  	if format
-      "%.2f" % (income - expense)
+  def income(date: Date.current, last_include: false)
+    if last_include
+  	   self.categories.income.joins(:transactions).where("event_date <= ?", date).sum(:amount)
     else
-      income - expose
+        self.categories.income.joins(:transactions).where("event_date < ?", date).sum(:amount)
+    end
+  end
+
+  def expense(date: Date.current, last_include: false)
+    if last_include
+      self.categories.expense.joins(:transactions).where("event_date <= ?", date).sum(:amount)
+    else
+      self.categories.expense.joins(:transactions).where("event_date < ?", date).sum(:amount)
+    end
+  end
+
+  def balance(format: true, date: Date.current, last_include: true)
+    balance = (income(date: date, last_include: last_include) - expense(date: date, 
+                                                                last_include: last_include))
+  	if format
+      "%.2f" % balance
+    else
+      balance
     end
   end
 end

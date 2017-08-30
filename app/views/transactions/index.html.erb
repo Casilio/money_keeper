@@ -19,8 +19,8 @@
 		<table class="table tabls-sm table-hover">
 			<thead>
 				<th>Amount</th>
-				<th>Type</th>
 				<th>Description</th>
+				<th>Category</th>
 				<th>Date</th>
 				<th> </th>
 				<th> </th>
@@ -33,16 +33,16 @@
 						<%= currency(trans.amount) %>
 					</td>   
 					<td>
-						<%= trans.category.flow %>
+						<%= trans.description %>
 					</td>
 					<td>
-						<%= trans.description %>
+						<%= "#{trans.category.name}(#{trans.category.flow})" %>
 					</td>
 					<td>
 						<%= trans.event_date %>
 					</td>
 					<td>
-					    <%= link_to " ", transactions_path(trans), method: :delete, class: "badge glyphicon glyphicon-remove" %>
+					    <%= link_to " ", transaction_path(trans), method: :delete, class: "badge glyphicon glyphicon-remove" %>
 					</td>
 					<td>
 					    <%= link_to " ", edit_transaction_path(trans), class: "badge  glyphicon glyphicon-pencil" %>

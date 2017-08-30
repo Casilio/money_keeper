@@ -1,0 +1,19 @@
+<% provide(:title, "Report page") %>
+<div class="container">
+	<%= form_for :report, url: new_report_path, method: :get, html: {class: "form-inline report-form"} do |f|%>
+		<%= f.label :from %>
+		<%= f.date_field :from, value: Date.current, class: "form-control" %>
+
+		<%= f.label :to %>
+		<%= f.date_field :to, value: Date.current, class: "form-control" %>
+
+		<%= f.submit "Get report", class: "btn btn-primary" %>
+	<% end %>
+	
+</div>
+
+<% if @ready == true %>
+	<div class="container">
+		<%= render "chart" %>
+	</div>
+<% end %>

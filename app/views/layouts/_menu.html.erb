@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav navbar-right">
 				<% if user_signed_in? %>
 
-                <li><%= link_to "Transactions", cashes_path %></li>
+                <li><%= link_to "Transactions", transactions_path %></li>
                 <li><%= link_to "Categories", category_index_path %></li>
         <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %><strong> (<%= current_user.balance %>$) </strong> <span class="caret"></span></a>

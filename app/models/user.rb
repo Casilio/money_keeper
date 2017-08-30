@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :categories, dependent: :destroy
-  has_many :cashes, through: :categories, source: :cashes
+  has_many :transactions, through: :categories, source: :transactions
 
   def name
   	self.email.split('@')[0]
@@ -13,11 +13,11 @@ class User < ApplicationRecord
 
 
   def income 
-  	self.categories.income.joins(:cashes).sum(:value) 
+  	self.categories.income.joins(:transactions).sum(:amount) 
   end
 
   def expense
-    self.categories.expense.joins(:cashes).sum(:value)
+    self.categories.expense.joins(:transactions).sum(:amount)
   end
 
   def balance(format: true)

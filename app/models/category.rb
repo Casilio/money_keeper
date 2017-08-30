@@ -9,7 +9,7 @@ class Category < ApplicationRecord
 	validates :user, presence: true
 
  	belongs_to :user
-    has_many :cashes, dependent: :destroy
+    has_many :transactions, dependent: :destroy
 
 
 	def unique_name_check
@@ -20,8 +20,7 @@ class Category < ApplicationRecord
 	    else
 	    	finded = self.user.categories.expense.find_by(name: self.name)
 	    end
-
-	    if finded
+	    if finded && finded != self
 	    	self.errors.add(:Category, "name already in use")
 	    	throw(:abort)
 	    	false

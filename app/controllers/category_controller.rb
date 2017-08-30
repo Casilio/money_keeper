@@ -1,13 +1,13 @@
 class CategoryController < ApplicationController
-	before_action :get_flow
+	before_action :get_catagories
 
 	def index
-		@flow = current_user.categories.build
+		@category = current_user.categories.build
 	end
 
 	def create
-		@flow = current_user.categories.new(category_params)
-		if @flow.save
+		@category = current_user.categories.new(category_params)
+		if @category.save
 			flash[:success] = "Category was added"
 			redirect_to category_index_path
 		else
@@ -43,9 +43,8 @@ class CategoryController < ApplicationController
 			params.require(:category).permit(:flow, :name)	
 		end
 
-		def get_flow
-			@income_c = current_user.categories.income
-			@expense_c = current_user.categories.expense
+		def get_catagories
+			@categories = current_user.categories.all
 		end
 
 		def find_category

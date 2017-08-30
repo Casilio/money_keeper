@@ -1,0 +1,60 @@
+<% provide(:title, "Transactions") %>
+
+<div class="col-md-4 col-lg-4">
+	<h2>Transaction form</h2>
+
+	<% if @categories.any? %>
+		<div class="add-transaction">
+			<% provide(:button, "Add transaction") %>
+			<%= render "new_transaction" %>
+		</div>
+	<% else %>
+		<p>First you have to add <%= link_to "category", category_index_path %></p>
+	<% end %>
+</div>
+
+<div class="col-md-8 col-lg-8">
+	<h2>Transactions list:</h2>
+
+		<table class="table tabls-sm table-hover">
+			<thead>
+				<th>Amount</th>
+				<th>Type</th>
+				<th>Description</th>
+				<th>Date</th>
+				<th> </th>
+				<th> </th>
+			</thead>
+			<tbody>
+		<% if @transactions.any?  %>
+			<% @transactions.each do |trans| %>
+				<tr>
+					<td>
+						<%= currency(trans.amount) %>
+					</td>   
+					<td>
+						<%= trans.category.flow %>
+					</td>
+					<td>
+						<%= trans.description %>
+					</td>
+					<td>
+						<%= trans.event_date %>
+					</td>
+					<td>
+					    <%= link_to " ", transactions_path(trans), method: :delete, class: "badge glyphicon glyphicon-remove" %>
+					</td>
+					<td>
+					    <%= link_to " ", edit_transaction_path(trans), class: "badge  glyphicon glyphicon-pencil" %>
+					</td>
+				</tr>
+			<% end %>
+		<% else %>
+			<tr>
+				<td>Empty</td>
+			</tr>
+		<% end %>
+			</tbody>
+		</table>
+			<%= will_paginate @transactions, renderer: BootstrapPagination::Rails %>
+</div>

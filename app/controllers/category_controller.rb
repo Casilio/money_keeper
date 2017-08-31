@@ -2,6 +2,7 @@ class CategoryController < ApplicationController
 	before_action :authenticate_user!
 	before_action :get_catagories
 	before_action :get_category, only: [:edit, :update, :destroy]
+	before_action :check_user, only: [:edit, :update, :destroy]
 
 	def index
 		@category = current_user.categories.build
@@ -57,4 +58,9 @@ class CategoryController < ApplicationController
 			@category = Category.find(params[:id])
 		end
 
+    def check_user
+      if !current_user?(@category.user)
+        redirect_to root_path
+      end
+    end
 end

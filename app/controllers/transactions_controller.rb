@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
   before_action :get_categories, only: [:index, :edit, :update, :create]
   before_action :get_transaction, only: [:destroy, :edit, :update]
   before_action :get_transactions, only: [:index, :create]
+  before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
     @transaction = Transaction.new(event_date: Time.zone.now, amount: 1)
@@ -60,5 +61,11 @@ class TransactionsController < ApplicationController
 
     def get_transactions
       @transactions = current_user.transactions.paginate(page: params[:page])
+    end
+
+    def check_user
+      if !current_user?(@transaction.user)
+        redirect_to root_path
+      end
     end
 end

@@ -24,12 +24,12 @@ class TransactionsController < ApplicationController
   end
 
   def update
-      if @transaction.update_attributes(transaction_params)
-        flash[:success] = "Transaction was updated"
-        redirect_to transactions_path
-      else
-        render "edit"
-      end
+    if @transaction.update_attributes(transaction_params)
+      flash[:success] = "Transaction was updated"
+      redirect_to transactions_path
+    else
+      render "edit"
+    end
   end
 
   def destroy
@@ -46,7 +46,6 @@ class TransactionsController < ApplicationController
   end
 
   private
-
     def get_categories
       @categories = current_user.categories.all
     end

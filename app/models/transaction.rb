@@ -1,4 +1,5 @@
 class Transaction < ApplicationRecord
+  default_scope -> { order(event_date: :desc) }
 
   before_save :check_date
   before_create :check_balance
@@ -6,8 +7,6 @@ class Transaction < ApplicationRecord
 
   belongs_to :category
   belongs_to :user
-
-  default_scope -> { order(event_date: :desc) }
 
   validates :amount, presence: true, numericality: { greater_than: 0 } 
   validates :category, presence: true
@@ -20,12 +19,12 @@ class Transaction < ApplicationRecord
 
   private 
   	def check_balance
-        if self.category.flow == "expense"
-          if self.user.balance(format: false).to_f - self.amount < 0
-            self.errors.add(:amount, "is too large")
-            throw(:abort)
-          end
+      if self.category.flow == "expense"
+        if self.user.balance(format: false).to_f - self.amount < 0
+          self.errors.add(:amount, "is too large")
+          throw(:abort)
         end
+      end
   	end
 
     def check_date
@@ -37,11 +36,11 @@ class Transaction < ApplicationRecord
     end
 
     def check_update
-        yield
-        if self.user.balance(format: false) < 0
-          self.amount = self.amount_was
-          self.errors.add(:amount, "is invalid. Balance can't be less that zero.")
-          raise ActiveRecord::Rollback
-        end
+      yield
+      if self.user.balance(format: false) < 0
+        self.amount = self.amount_was
+        self.errors.add(:amount, "is invalid. Balance can't be less that zero.")
+        raise ActiveRecord::Rollback
+      end
     end
 end

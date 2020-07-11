@@ -1,5 +1,7 @@
-<%= javascript_tag do %>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+<%= javascript_tag do %>
+  $(function() {
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
       var income = <%= @income.to_a.to_json.html_safe %>
@@ -43,6 +45,7 @@
         var chart = new google.visualization.PieChart(document.getElementById('expense'));
         chart.draw(data, options);
       }
+  });
 <% end %>
     <div class="col-md-6 col-lg-6">
       <h3>Balance before: <%= @balance_from %></h3>
@@ -68,23 +71,23 @@
               <th>Category</th>
               <th>Date</th>
             </thead>
-          <tbody>
-          <% @income_transactions.each do |trans| %>
-            <tr>
-              <td>
-                <%= currency(trans.amount) %>
-              </td>   
-              <td>
-                <%= trans.description %>
-              </td>
-              <td>
-                <%= "#{trans.category.name}" %>
-              </td>
-              <td>
-                <%= trans.event_date %>
-              </td>
-            </tr>
-            <% end %>
+            <tbody>
+              <% @income_transactions.each do |trans| %>
+                <tr>
+                  <td>
+                    <%= currency(trans.amount) %>
+                  </td>
+                  <td>
+                    <%= trans.description %>
+                  </td>
+                  <td>
+                    <%= trans.category.name %>
+                  </td>
+                  <td>
+                    <%= trans.event_date %>
+                  </td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         <% end %>
@@ -100,23 +103,23 @@
               <th>Category</th>
               <th>Date</th>
             </thead>
-          <tbody>
-          <% @expense_transactions.each do |trans| %>
-            <tr>
-              <td>
-                <%= currency(trans.amount) %>
-              </td>   
-              <td>
-                <%= trans.description %>
-              </td>
-              <td>
-                <%= "#{trans.category.name}" %>
-              </td>
-              <td>
-                <%= trans.event_date %>
-              </td>
-            </tr>
-            <% end %>
+            <tbody>
+              <% @expense_transactions.each do |trans| %>
+                <tr>
+                  <td>
+                    <%= currency(trans.amount) %>
+                  </td>
+                  <td>
+                    <%= trans.description %>
+                  </td>
+                  <td>
+                    <%= trans.category.name %>
+                  </td>
+                  <td>
+                    <%= trans.event_date %>
+                  </td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         <% end %>

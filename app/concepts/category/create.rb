@@ -2,7 +2,7 @@ class Category
   class Create < Trailblazer::Operation
     step Model(Category, :new)
     step Contract::Build(constant: Category::Contracts::Create)
-    step Contract::Validate(key: :category)
+    step Contract::Validate()
     step :persist!
 
 #    contract do

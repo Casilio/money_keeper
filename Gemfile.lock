@@ -296,6 +296,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.4.1)
   byebug
   devise
+  dry-core
   dry-validation
   jquery-rails
   listen (>= 3.0.5, < 3.2)

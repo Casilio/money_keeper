@@ -9,8 +9,10 @@ module Category::Contracts
     property :flow
 
     validation do
-      required(:name).filled
-      required(:flow).value(included_in?: [:income, :expense])
+      params do
+        required(:name).filled
+        required(:flow).value(included_in?: [:income, :expense])
+      end
     end
   end
 end

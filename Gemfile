@@ -10,6 +10,7 @@ end
 gem 'rails', '~> 6.0.3.2'
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
+gem 'sqlite3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -46,8 +47,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :production do
-  gem 'mysql2'
+group :development, :test do
+  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

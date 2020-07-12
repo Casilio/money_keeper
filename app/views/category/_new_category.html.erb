@@ -1,11 +1,11 @@
-<%= form_for(@category, url: category_index_path) do |f| %>
-	<%= render "shared/error_messages", object: f.object %>
+<%= form_for(@form, url: category_index_path) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
 
-	<%= f.label :name %>
-	<%= f.text_field :name, class: 'form-control', placeholder: "Category name" %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control', placeholder: "Category name" %>
 
-	<%= f.label :type %>
-	<%= f.select :flow, [['Income', "income"], ["Expense", "expense"]], {}, {class: "form-control"} %>
+  <%= f.label :type %>
+  <%= f.select :flow, [['Income', "income"], ["Expense", "expense"]], {}, {class: "form-control"} %>
 
-	<%= f.submit "Add category", class: 'btn btn-primary' %>
+  <%= f.submit "Add category", class: 'btn btn-primary' %>
 <% end %>

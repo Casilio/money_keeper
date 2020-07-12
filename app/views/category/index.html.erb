@@ -1,48 +1,48 @@
 <% provide(:title, "Categories") %>
 
 <div class="col-md-4 col-lg-4">
-	<h2>New category</h2>
+  <h2>New category</h2>
 
-	<div class="add-category">
-		<%= render "new_category" %>
-	</div>
+  <div class="add-category">
+    <%= render "new_category" %>
+  </div>
 
 </div>
 <div class="col-md-8 col-lg-8">
-	<h2>Categories list:</h2>
+  <h2>Categories list:</h2>
 
-	<% if @categories.any?  %>
-		<table class="table tabls-sm table-hover">
-			<thead>
-				<th>Name</th>
-				<th>Type</th>
-				<th>Amount</th>
-				<th> </th>
-				<th> </th>
-			</thead>
-			<tbody>
-				<% @categories.each do |cat| %>
-				<tr>
-					<td>
-						<%= cat.name %>
-					</td>   
-					<td>
-						<%= cat.flow %>
-					</td>
-					<td>
-						<%= currency(cat.amount) %>
-					</td>
-					<td>
-					    <%= link_to " ", edit_category_path(cat), class: "badge  glyphicon glyphicon-pencil" %>
-					</td>
-					<td>
-					    <%= link_to " ", category_path(cat), method: :delete, class: "badge glyphicon glyphicon-remove" %>
-					</td>
-				<% end %>	
-				</tr>
-			</tbody>
-		</table>
-	<% else %>
-		<p>No category find</p>
-	<% end %>
+  <% if @categories.any?  %>
+    <table class="table tabls-sm table-hover">
+      <thead>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th> </th>
+        <th> </th>
+      </thead>
+      <tbody>
+        <% @categories.each do |cat| %>
+        <tr>
+          <td>
+            <%= cat.name %>
+          </td>   
+          <td>
+            <%= cat.flow %>
+          </td>
+          <td>
+            <%= currency(cat.amount) %>
+          </td>
+          <td>
+              <%= link_to " ", edit_category_path(cat), class: "badge  glyphicon glyphicon-pencil" %>
+          </td>
+          <td>
+              <%= link_to " ", category_path(cat), method: :delete, class: "badge glyphicon glyphicon-remove" %>
+          </td>
+        <% end %>  
+        </tr>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No category find</p>
+  <% end %>
 </div>

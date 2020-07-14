@@ -1,17 +1,21 @@
-require 'reform'
-require 'reform/form/dry'
-
 module Category::Contracts
   class Create < Reform::Form
-    include Dry
 
     property :name
     property :flow
 
-    validation do
+
+    validation name: :default, with: { form: true } do
+      configure do
+        def unique?(attr_name, value)
+          byebug
+        end
+      end
+
+      byebug
       params do
         required(:name).filled
-        required(:flow).value(included_in?: [:income, :expense])
+        required(:flow).value(included_in?: [:income, :expense], unique?: :flow)
       end
     end
   end

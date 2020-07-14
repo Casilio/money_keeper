@@ -28,14 +28,12 @@ gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
 
-# TODO: specify exact versions
-gem 'trailblazer'
-gem 'trailblazer-rails'
-gem 'trailblazer-loader'
-gem 'reform'
+gem 'dry-validation', '1.5.1'
 
-gem 'dry-core'
-gem 'dry-validation'
+gem 'reform', '2.3.3'
+gem 'trailblazer', '2.1.0'
+gem 'trailblazer-rails', '2.1.7'
+
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

@@ -4,18 +4,16 @@ module Category::Contracts
     property :name
     property :flow
 
-
     validation name: :default, with: { form: true } do
       configure do
         def unique?(attr_name, value)
-          byebug
+          # TODO
         end
       end
 
-      byebug
       params do
         required(:name).filled
-        required(:flow).value(included_in?: [:income, :expense], unique?: :flow)
+        required(:flow).value(included_in?: [:income, :expense])
       end
     end
   end

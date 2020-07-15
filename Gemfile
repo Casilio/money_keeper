@@ -31,6 +31,7 @@ gem 'will_paginate-bootstrap'
 gem 'dry-validation', '1.5.1'
 
 gem 'reform', '2.3.3'
+gem 'reform-rails', '~> 0.2.0'
 gem 'trailblazer', '2.1.0'
 gem 'trailblazer-rails', '2.1.7'
 

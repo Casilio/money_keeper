@@ -35,7 +35,6 @@ gem 'reform-rails', '~> 0.2.0'
 gem 'trailblazer', '2.1.0'
 gem 'trailblazer-rails', '2.1.7'
 
-
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -47,11 +46,14 @@ end
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "factory_bot_rails", "~> 6.1"
 end
 
 group :test do
   gem 'rspec-rails'
+  gem 'database_cleaner-active_record'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+

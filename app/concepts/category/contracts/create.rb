@@ -4,16 +4,20 @@ module Category::Contracts
     property :name
     property :flow
 
-    validation name: :default, with: { form: true } do
-      configure do
-        def unique?(attr_name, value)
-          # TODO
-        end
+    validation do
+      option :form
+
+      schema do
+        required(:name).filled(:str?, size?: 3..250)
+        required(:flow).filled(:str?, included_in?: ['income', 'expense'])
       end
 
-      params do
-        required(:name).filled
-        required(:flow).value(included_in?: [:income, :expense])
+      rule(:name) do
+        record = form.model
+
+        if record.class.where.not(id: record.id).where(name: values[:name], flow: values[:flow], user: record.user).exists?
+          key.failure('name is already in use')
+        end
       end
     end
   end

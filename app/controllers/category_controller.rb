@@ -5,12 +5,12 @@ class CategoryController < ApplicationController
   before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
-    form Category::Create
+    run Category::Present
   end
 
   def create
     run Category::Create do |op|
-      flash[:success] = "Category was added"
+      flash[:success] = 'Category was added'
       return redirect_to category_index_path
     end
 
